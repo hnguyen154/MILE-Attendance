@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add Edit Remove HTML Table Row</title>
+        <meta charset="windows-1252">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <style>
+            .container{overflow: hidden}
+            .tab{float: left;}
+            .tab-2{margin-left: 50px}
+            .tab-2 input{display: block;margin-bottom: 10px}
+            tr{transition:all .25s ease-in-out}
+            tr:hover{background-color:#FFA693;cursor: pointer}
+
+        </style>
+
+    </head>
+    <body>
+        <div class="header">
+          <h1 style="text-align:center;">URBAN LIFE MILE ATTENDANCE MAKE-UP FORM</h1>
+          <h3 style="text-align:center;">NOTE: Students only allow to make-up on the same week that they missed.</h1>
+        </div>
+        <div class="container">
+            <div class="tab tab-2">
+                Week:<br>
+                      <select name="week" id="week">
+                        <option value="----">----</option>
+                        <option value="1">Week 1</option>
+                        <option value="2">Week 2</option>
+                        <option value="3">Week 3</option>
+                        <option value="4">Week 4</option>
+                        <option value="5">Week 5</option>
+                        <option value="6">Week 6</option>
+                        <option value="7">Week 7</option>
+                        <option value="8">Week 8</option>
+                        <option value="9">Week 9</option>
+                        <option value="10">Week 10</option>
+                        <option value="11">Week 11</option>
+                        <option value="12">Week 12</option>
+                        <option value="13">Week 13</option>
+                        <option value="14">Week 14</option>
+                        <option value="15">Week 15</option>
+                        <option value="16">Week 16</option>
+                        <option value="17">Week 17</option>
+                        <option value="18">Week 18</option>
+                        <option value="19">Week 19</option>
+                        <option value="20">Week 20</option>
+                      </select><br><br>
+                Student ID :<input type="number" name="ID" id="ID">
+                First Name :<input type="text" name="fname" id="fname">
+                Last Name :<input type="text" name="lname" id="lname">
+                Missed Date: <input type="date" name="MissedDate" id="MissedDate">
+                Missed Time: <input type="time" name="MissedTime" id="MissedTime" min="08:00" max="20:00">
+                Make-Up Date: <input type="date" name="MakeupDate" id="MakeupDate">
+                Make-Up Time: <input type="time" name="MakeupTime" id="MakeupTime" min="08:00" max="20:00">
+                Class: <br>
+                      <select name="class" id="class">
+                        <option value="----">----</option>
+                        <option value="0999">0999</option>
+                        <option value="1111">1111</option>
+                        <option value="1113">1113</option>
+                      </select><br><br>
+                Instructor:<br>
+                <select name="instructor" id="instructor">
+                  <option value="-----------">-----------</option>
+                  <option value="Mikhail Stroev">Mikhail Stroev</option>
+                  <option value="Catrina May">Catrina May</option>
+                  <option value="Nizamettin Tokar">Nizamettin Tokar</option>
+                  <option value="Valerie Miller">Valerie Miller</option>
+                  <option value="Rodrigo Castro">Rodrigo Castro</option>
+                  <option value="Sutandra Sarkar">Sutandra Sarkar</option>
+                  <option value="Barrett Brister">Barrett Brister</option>
+                </select><br><br>
+                Assistant's Name: <input type="text" name="assistant" id="assistant">
+
+                <button onclick="addHtmlTableRow();">Add</button>
+                <button onclick="editHtmlTbleSelectedRow();">Edit</button>
+                <button onclick="removeSelectedRow();">Remove</button>
+                <button onclick="Export('table');">Export</button>
+            </div>
+
+            <div class="tab tab-2">
+                <table id="table" border="1">
+                    <tr>
+                        <th>Week</th>
+                        <th>Student ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Missed Date</th>
+                        <th>Missed Time</th>
+                        <th>Make-Up Date</th>
+                        <th>Make-Up Time</th>
+                        <th>Class</th>
+                        <th>Instructor</th>
+                        <th>Assistant</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>002129292</td>
+                        <td>Example FName</td>
+                        <td>Example LName</td>
+                        <td>2020-01-24</td>
+                        <td>13:30</td>
+                        <td>2020-01-24</td>
+                        <td>18:30</td>
+                        <td>1111</td>
+                        <td>Mikhail Stroev</td>
+                        <td>FName LName</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+        <script>
+            // Warning before leaving the page (back button, or outgoinglink)
+            window.onbeforeunload = function() {
+                return "Data will be lost if you leave the page, are you sure?";
+            };
+
+
+            var rIndex,
+                table = document.getElementById("table");
+
+            // check the empty input
+            function checkEmptyInput()
+            {
+                var isEmpty = false,
+                    week = document.getElementById("week").value,
+                    id = document.getElementById("ID").value,
+                    fname = document.getElementById("fname").value,
+                    lname = document.getElementById("lname").value,
+                    MissedDate = document.getElementById("MissedDate").value,
+                    MissedTime = document.getElementById("MissedTime").value,
+                    MakeupDate = document.getElementById("MakeupDate").value,
+                    MakeupTime = document.getElementById("MakeupTime").value,
+                    course = document.getElementById("class").value,
+                    instructor = document.getElementById("instructor").value,
+                    assistant = document.getElementById("assistant").value;
+
+                if(week === "----"){
+                    alert("Week Cannot Be Empty");
+                    isEmpty = true;
+                }
+                else if(id === ""){
+                    alert("Student ID Cannot Be Empty");
+                    isEmpty = true;
+                }
+                else if(fname === ""){
+                    alert("First Name Cannot Be Empty");
+                    isEmpty = true;
+                }
+                else if(lname === ""){
+                    alert("Last Name Cannot Be Empty");
+                    isEmpty = true;
+                }
+                else if(MissedDate === "mm/dd/yyyy"){
+                    alert("Missed Date Cannot Be Empty");
+                    isEmpty = true;
+                }
+                else if(MissedDate === "mm/dd/yyyy"){
+                    alert("Missed Date Cannot Be Empty");
+                    isEmpty = true;
+                }
+                else if(MissedTime === "--:-- --"){
+                    alert("Missed Time Cannot Be Empty");
+                    isEmpty = true;
+                }
+                else if(MakeupDate === "mm/dd/yyyy"){
+                    alert("Make-Up Date Cannot Be Empty");
+                    isEmpty = true;
+                }
+                else if(MakeupTime === "--:-- --"){
+                    alert("Missed Time Cannot Be Empty");
+                    isEmpty = true;
+                }
+                else if(course === "----"){
+                    alert("Class Cannot Be Empty");
+                    isEmpty = true;
+                }
+                else if(instructor === "-----------"){
+                    alert("Instructor Cannot Be Empty");
+                    isEmpty = true;
+                }
+                else if(assistant === ""){
+                    alert("Assistant's Name Cannot Be Empty");
+                    isEmpty = true;
+                }
+                return isEmpty;
+            }
+
+            // add Row
+            function addHtmlTableRow()
+            {
+                // get the table by id
+                // create a new row and cells
+                // get value from input text
+                // set the values into row cell's
+                if(!checkEmptyInput()){
+                var newRow = table.insertRow(table.length),
+                    cell1 = newRow.insertCell(0),
+                    cell2 = newRow.insertCell(1),
+                    cell3 = newRow.insertCell(2),
+                    cell4 = newRow.insertCell(3),
+                    cell5 = newRow.insertCell(4),
+                    cell6 = newRow.insertCell(5),
+                    cell7 = newRow.insertCell(6),
+                    cell8 = newRow.insertCell(7),
+                    cell9 = newRow.insertCell(8),
+                    cell10 = newRow.insertCell(9),
+                    cell11 = newRow.insertCell(10);
+
+                    week = document.getElementById("week").value,
+                    id = document.getElementById("ID").value,
+                    fname = document.getElementById("fname").value,
+                    lname = document.getElementById("lname").value,
+                    MissedDate = document.getElementById("MissedDate").value,
+                    MissedTime = document.getElementById("MissedTime").value,
+                    MakeupDate = document.getElementById("MakeupDate").value,
+                    MakeupTime = document.getElementById("MakeupTime").value,
+                    course = document.getElementById("class").value,
+                    instructor = document.getElementById("instructor").value,
+                    assistant = document.getElementById("assistant").value;
+
+                cell1.innerHTML = week;
+                cell2.innerHTML = id;
+                cell3.innerHTML = fname;
+                cell4.innerHTML = lname;
+                cell5.innerHTML = MissedDate;
+                cell6.innerHTML = MissedTime;
+                cell7.innerHTML = MakeupDate;
+                cell8.innerHTML = MakeupTime;
+                cell9.innerHTML = course;
+                cell10.innerHTML = instructor;
+                cell11.innerHTML = assistant;
+
+
+                // call the function to set the event to the new row
+                selectedRowToInput();
+            }
+            }
+
+            // display selected row data into input text
+            function selectedRowToInput()
+            {
+
+                for(var i = 1; i < table.rows.length; i++)
+                {
+                    table.rows[i].onclick = function()
+                    {
+                      // get the selected row index
+                      rIndex = this.rowIndex;
+                      document.getElementById("week").value = this.cells[0].innerHTML;
+                      document.getElementById("ID").value = this.cells[1].innerHTML;
+                      document.getElementById("fname").value = this.cells[2].innerHTML;
+                      document.getElementById("lname").value = this.cells[3].innerHTML;
+                      document.getElementById("MissedDate").value = this.cells[4].innerHTML;
+                      document.getElementById("MissedTime").value = this.cells[5].innerHTML;
+                      document.getElementById("MakeupDate").value = this.cells[6].innerHTML;
+                      document.getElementById("MakeupTime").value = this.cells[7].innerHTML;
+                      document.getElementById("course").value = this.cells[8].innerHTML;
+                      document.getElementById("instructor").value = this.cells[9].innerHTML;
+                      document.getElementById("assistant").value = this.cells[10].innerHTML;
+                    };
+                }
+            }
+            selectedRowToInput();
+
+            function editHtmlTbleSelectedRow()
+            {
+                var week = document.getElementById("week").value,
+                    id = document.getElementById("ID").value,
+                    fname = document.getElementById("fname").value,
+                    lname = document.getElementById("lname").value,
+                    MissedDate = document.getElementById("MissedDate").value,
+                    MissedTime = document.getElementById("MissedTime").value,
+                    MakeupDate = document.getElementById("MakeupDate").value,
+                    MakeupTime = document.getElementById("MakeupTime").value,
+                    course = document.getElementById("class").value,
+                    instructor = document.getElementById("instructor").value,
+                    assistant = document.getElementById("assistant").value;
+
+
+               if(!checkEmptyInput()){
+                table.rows[rIndex].cells[0].innerHTML = week;
+                table.rows[rIndex].cells[1].innerHTML = id;
+                table.rows[rIndex].cells[2].innerHTML = fname;
+                table.rows[rIndex].cells[3].innerHTML = lname;
+                table.rows[rIndex].cells[4].innerHTML = MissedDate;
+                table.rows[rIndex].cells[5].innerHTML = MissedTime;
+                table.rows[rIndex].cells[6].innerHTML = MakeupDate;
+                table.rows[rIndex].cells[7].innerHTML = MakeupTime;
+                table.rows[rIndex].cells[8].innerHTML = course;
+                table.rows[rIndex].cells[9].innerHTML = instructor;
+                table.rows[rIndex].cells[10].innerHTML = assistant;
+              }
+            }
+
+            function removeSelectedRow()
+            {
+                table.deleteRow(rIndex);
+                // clear input text
+                document.getElementById("week").value = "";
+                document.getElementById("ID").value = "";
+                document.getElementById("fname").value = "";
+                document.getElementById("lname").value = "";
+                document.getElementById("MissedDate").value = "";
+                document.getElementById("MissedTime").value = "";
+                document.getElementById("MakeupDate").value = "";
+                document.getElementById("MakeupTime").value = "";
+                document.getElementById("course").value = "";
+                document.getElementById("instructor").value = "";
+                document.getElementById("assistant").value = "";
+            }
+
+            function Export(tableID, filename = ''){
+                var downloadLink;
+                var dataType = 'application/vnd.ms-excel';
+                var tableSelect = document.getElementById(tableID);
+                var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+                // Specify file name
+                filename = filename?filename+'.xls':'excel_data.xls';
+
+                // Create download link element
+                downloadLink = document.createElement("a");
+
+                document.body.appendChild(downloadLink);
+
+                if(navigator.msSaveOrOpenBlob){
+                    var blob = new Blob(['\ufeff', tableHTML], {
+                        type: dataType
+                    });
+                    navigator.msSaveOrOpenBlob( blob, filename);
+                }else{
+                    // Create a link to the file
+                    downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+                    // Setting the file name
+                    downloadLink.download = filename;
+
+                    //triggering the function
+                    downloadLink.click();
+                }
+            }
+
+        </script>
+
+    </body>
+</html>
