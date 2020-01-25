@@ -4,140 +4,177 @@
         <title>MILE Make-Up Attendance</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <style>
-            .container{overflow: hidden}
-            .tab{float: left;}
-            .tab-2{margin-left: 50px}
-            .tab-2 input{display: block;margin-bottom: 10px}
+            body{padding-left: 50px; padding-right: 50px}
             tr{transition:all .25s ease-in-out}
-            tr:hover{background-color:#FFA693;cursor: pointer}
-
+            #tableBody tr:hover{background-color:#FFA693;cursor: pointer}
         </style>
 
     </head>
     <body>
         <div class="header">
-          <h1 style="text-align:center;"> URBAN LIFE MILE ATTENDANCE MAKE-UP FORM </h1>
-          <h3 style="text-align:center;"> NOTE: Students only allow to make-up on the same week that they missed. </h3>
-          <h3 style="text-align:center;"> Please DO NOT REFRESH or EXIT the page. Export every Friday night! </h3>
-        </div>
-        <div class="container">
-            <div class="tab tab-2">
-                Week:<br>
-                      <select name="week" id="week">
-                        <option value="----">----</option>
-                        <option value="1">Week 1</option>
-                        <option value="2">Week 2</option>
-                        <option value="3">Week 3</option>
-                        <option value="4">Week 4</option>
-                        <option value="5">Week 5</option>
-                        <option value="6">Week 6</option>
-                        <option value="7">Week 7</option>
-                        <option value="8">Week 8</option>
-                        <option value="9">Week 9</option>
-                        <option value="10">Week 10</option>
-                        <option value="11">Week 11</option>
-                        <option value="12">Week 12</option>
-                        <option value="13">Week 13</option>
-                        <option value="14">Week 14</option>
-                        <option value="15">Week 15</option>
-                        <option value="16">Week 16</option>
-                        <option value="17">Week 17</option>
-                        <option value="18">Week 18</option>
-                        <option value="19">Week 19</option>
-                        <option value="20">Week 20</option>
-                      </select><br><br>
-                Student ID :<input type="number" name="ID" id="ID">
-                First Name :<input type="text" name="fname" id="fname">
-                Last Name :<input type="text" name="lname" id="lname">
-                Missed Date: <input type="date" name="MissedDate" id="MissedDate">
-                Missed Time: <input type="time" name="MissedTime" id="MissedTime" min="08:00" max="20:00">
-                Make-Up Date: <input type="date" name="MakeupDate" id="MakeupDate">
-                Make-Up Time: <input type="time" name="MakeupTime" id="MakeupTime" min="08:00" max="20:00">
-                Class: <br>
-                      <select name="class" id="class">
-                        <option value="----">----</option>
-                        <option value="0999">0999</option>
-                        <option value="1111">1111</option>
-                        <option value="1113">1113</option>
-                      </select><br><br>
-                Instructor:<br>
-                <select name="instructor" id="instructor">
-                  <option value="-----------">-----------</option>
-                  <option value="Mikhail Stroev">Mikhail Stroev</option>
-                  <option value="Catrina May">Catrina May</option>
-                  <option value="Nizamettin Tokar">Nizamettin Tokar</option>
-                  <option value="Valerie Miller">Valerie Miller</option>
-                  <option value="Rodrigo Castro">Rodrigo Castro</option>
-                  <option value="Sutandra Sarkar">Sutandra Sarkar</option>
-                  <option value="Barrett Brister">Barrett Brister</option>
-                </select><br><br>
-                Assistant's Name: <input type="text" name="assistant" id="assistant">
+          <h2 style="text-align:center;"> URBAN LIFE MILE ATTENDANCE MAKE-UP FORM </h2>
+          <h4 style="text-align:center;"> NOTE: Students only allow to make-up on the same week that they missed. </h4>
+          <h4 style="text-align:center;"> Please DO NOT REFRESH or EXIT the page. Export every Friday night! </h4>
+        </div><br>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-3 col-md-6 col-lg-4">
+                <div class="form-group">
+                  <label for="week" class="col-md-5">Week:</label>
+                        <select name="week" id="week" class="col-md-5">
+                          <option value="----">----</option>
+                          <option value="1">Week 1</option>
+                          <option value="2">Week 2</option>
+                          <option value="3">Week 3</option>
+                          <option value="4">Week 4</option>
+                          <option value="5">Week 5</option>
+                          <option value="6">Week 6</option>
+                          <option value="7">Week 7</option>
+                          <option value="8">Week 8</option>
+                          <option value="9">Week 9</option>
+                          <option value="10">Week 10</option>
+                          <option value="11">Week 11</option>
+                          <option value="12">Week 12</option>
+                          <option value="13">Week 13</option>
+                          <option value="14">Week 14</option>
+                          <option value="15">Week 15</option>
+                          <option value="16">Week 16</option>
+                          <option value="17">Week 17</option>
+                          <option value="18">Week 18</option>
+                          <option value="19">Week 19</option>
+                          <option value="20">Week 20</option>
+                        </select>
+                </div><br>
+                <div class="form-group">
+                  <label for="ID" class="col-md-5">Student ID:</label>
+                  <input type="text" class="col-md-5" name="ID" id="ID" placeholder="000-00-0000">
+                </div><br>
+                <div class="form-group">
+                  <label for="fname" class="col-md-5">First Name:</label>
+                  <input type="text" class="col-md-5" name="fname" id="fname">
+                </div><br>
+                <div class="form-group">
+                  <label for="lname" class="col-md-5">Last Name :</label>
+                  <input type="text" class="col-md-5" name="lname" id="lname">
+                </div><br>
+                <div class="form-group">
+                  <label for="MissedDate" class="col-md-5">Missed Date:</label>
+                  <input type="date" class="col-md-5" name="MissedDate" id="MissedDate">
+                </div><br>
+                <div class="form-group">
+                  <label for="MissedTime" class="col-md-5">Missed Time:</label>
+                  <input type="time" class="col-md-5" name="MissedTime" id="MissedTime" min="08:00" max="20:00">
+                </div><br>
+                <div class="form-group">
+                  <label for="MakeupDate" class="col-md-5">Make-Up Date:</label>
+                  <input type="date" class="col-md-5" name="MakeupDate" id="MakeupDate">
+                </div><br>
+                <div class="form-group">
+                  <label for="MakeupTime" class="col-md-5">Make-Up Time: </label>
+                  <input type="time" class="col-md-5" name="MakeupTime" id="MakeupTime" min="08:00" max="20:00">
+                </div><br>
+                <div class="form-group">
+                    <label for="class" class="col-md-5">Class:</label>
+                    <select name="class" id="class" class="col-md-5">
+                      <option value="----">----</option>
+                      <option value="0999">0999</option>
+                      <option value="1111">1111</option>
+                      <option value="1113">1113</option>
+                    </select>
+                  </div><br>
+                  <div class="form-group">
+                    <label for="instructor" class="col-md-5">Instructor:</label>
+                    <select name="instructor" id="instructor" class="col-md-5">
+                      <option value="-----------">-----------</option>
+                      <option value="Mikhail Stroev">Mikhail Stroev</option>
+                      <option value="Catrina May">Catrina May</option>
+                      <option value="Nizamettin Tokar">Nizamettin Tokar</option>
+                      <option value="Valerie Miller">Valerie Miller</option>
+                      <option value="Rodrigo Castro">Rodrigo Castro</option>
+                      <option value="Sutandra Sarkar">Sutandra Sarkar</option>
+                      <option value="Barrett Brister">Barrett Brister</option>
+                    </select>
+                  </div><br>
+                  <div class="form-group" role="group">
+                    <label for="assistant" class="col-md-5">Assistant's Name:</label>
+                    <input type="text" name="assistant" id="assistant" class="col-md-5">
+                  </div><br><br><br>
 
-                <button onclick="addHtmlTableRow();">Add</button>
-                <button onclick="editHtmlTbleSelectedRow();">Edit</button>
-                <button onclick="removeSelectedRow();">Remove</button>
-                <button onclick="Export('table');">Export</button>
+                <div class="btn-group" style="float: center;">
+                  <button type="button" class="btn btn-success" onclick="addHtmlTableRow();">Add</button>
+                  <button type="button" class="btn btn-default" onclick="editHtmlTbleSelectedRow();">Edit</button>
+                  <button type="button" class="btn btn-default" onclick="Clear();">Clear</button>
+                  <button type="button" class="btn btn-danger" onclick="Export('table');">Export</button>
+                  <button type="button" class="btn btn-default" onclick="removeSelectedRow();">Remove</button>
+                </div>
             </div>
 
-            <div class="tab tab-2">
-                <table id="table" border="1">
-                    <tr>
-                        <th>Week</th>
-                        <th>Student ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Missed Date</th>
-                        <th>Missed Time</th>
-                        <th>Make-Up Date</th>
-                        <th>Make-Up Time</th>
-                        <th>Class</th>
-                        <th>Instructor</th>
-                        <th>Assistant</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>002129292</td>
-                        <td>Example FName</td>
-                        <td>Example LName</td>
-                        <td>2020-01-24</td>
-                        <td>13:30</td>
-                        <td>2020-01-24</td>
-                        <td>18:30</td>
-                        <td>1111</td>
-                        <td>Mikhail Stroev</td>
-                        <td>FName LName</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>123456789</td>
-                        <td>Example 2.1</td>
-                        <td>Example 2.2</td>
-                        <td>2020-01-24</td>
-                        <td>13:30</td>
-                        <td>2020-01-24</td>
-                        <td>18:30</td>
-                        <td>1111</td>
-                        <td>Mikhail Stroev</td>
-                        <td>Name 123</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>32323113</td>
-                        <td>Example 3.1</td>
-                        <td>Example 3.2</td>
-                        <td>2020-01-24</td>
-                        <td>13:30</td>
-                        <td>2020-01-24</td>
-                        <td>18:30</td>
-                        <td>1111</td>
-                        <td>Mikhail Stroev</td>
-                        <td>Name 345</td>
-                    </tr>
+            <div class="col-sm-9 col-md-6 col-lg-8">
+                <input class="form-control" type="text" id="SearchInput" placeholder="Search..."> <br>
+                <table id="table" class="table table-bordered">
+                    <thead class="thead-light">
+                      <tr>
+                          <th scope="col">Week</th>
+                          <th scope="col">Student ID</th>
+                          <th scope="col">First Name</th>
+                          <th scope="col">Last Name</th>
+                          <th scope="col">Missed Date</th>
+                          <th scope="col">Missed Time</th>
+                          <th scope="col">Make-Up Date</th>
+                          <th scope="col">Make-Up Time</th>
+                          <th scope="col">Class</th>
+                          <th scope="col">Instructor</th>
+                          <th scope="col">Assistant</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                      <tr>
+                          <td>1</td>
+                          <td>002-12-9292</td>
+                          <td>Student</td>
+                          <td>One</td>
+                          <td>2020-01-22</td>
+                          <td>13:30</td>
+                          <td>2020-01-24</td>
+                          <td>8:30</td>
+                          <td>1113</td>
+                          <td>Mikhail Stroev</td>
+                          <td>Weidan He</td>
+                      </tr>
+                      <tr>
+                          <td>1</td>
+                          <td>123-45-6789</td>
+                          <td>Princess</td>
+                          <td>Banana</td>
+                          <td>2020-01-24</td>
+                          <td>9:30</td>
+                          <td>2020-01-24</td>
+                          <td>18:30</td>
+                          <td>1111</td>
+                          <td>Valerie Miller</td>
+                          <td>Hao Nguyen</td>
+                      </tr>
+                      <tr>
+                          <td>4</td>
+                          <td>323-23-1134</td>
+                          <td>Spongebob</td>
+                          <td>Squarepant</td>
+                          <td>2020-02-11</td>
+                          <td>13:30</td>
+                          <td>2020-02-12</td>
+                          <td>18:30</td>
+                          <td>0999</td>
+                          <td>Kangni</td>
+                          <td>Chris Lee</td>
+                      </tr>
+                  </tbody>
                 </table>
             </div>
-
+          </div>
         </div>
 
         <script>
@@ -265,7 +302,8 @@
 
                 // call the function to set the event to the new row
                 selectedRowToInput();
-            }
+                alert("Successfully Added");
+                }
             }
 
             // display selected row data into input text
@@ -296,6 +334,7 @@
 
             function editHtmlTbleSelectedRow()
             {
+                var r = confirm("Are you sure you want to continue?");
                 var week = document.getElementById("week").value,
                     id = document.getElementById("ID").value,
                     fname = document.getElementById("fname").value,
@@ -309,7 +348,7 @@
                     assistant = document.getElementById("assistant").value;
 
 
-               if(!checkEmptyInput()){
+               if(!checkEmptyInput() && r == true){
                 table.rows[rIndex].cells[0].innerHTML = week;
                 table.rows[rIndex].cells[1].innerHTML = id;
                 table.rows[rIndex].cells[2].innerHTML = fname;
@@ -321,12 +360,34 @@
                 table.rows[rIndex].cells[8].innerHTML = course;
                 table.rows[rIndex].cells[9].innerHTML = instructor;
                 table.rows[rIndex].cells[10].innerHTML = assistant;
+                alert("Successfully Edited")
               }
             }
 
             function removeSelectedRow()
             {
-                table.deleteRow(rIndex);
+                var r = confirm("Delete this entry?");
+                if (r == true) {
+                    table.deleteRow(rIndex);
+                    // clear input text
+                    document.getElementById("week").value = "";
+                    document.getElementById("ID").value = "";
+                    document.getElementById("fname").value = "";
+                    document.getElementById("lname").value = "";
+                    document.getElementById("MissedDate").value = "";
+                    document.getElementById("MissedTime").value = "";
+                    document.getElementById("MakeupDate").value = "";
+                    document.getElementById("MakeupTime").value = "";
+                    document.getElementById("class").value = "";
+                    document.getElementById("instructor").value = "";
+                    document.getElementById("assistant").value = "";
+                    alert("Successfully Deleted!");
+                } else {
+                    alert("Canceled deletion");
+                }
+            }
+
+            function Clear(){
                 // clear input text
                 document.getElementById("week").value = "";
                 document.getElementById("ID").value = "";
@@ -371,6 +432,15 @@
                     downloadLink.click();
                 }
             }
+
+            $(document).ready(function(){
+              $("#SearchInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#tableBody tr").filter(function() {
+                  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+              });
+            });
 
         </script>
 
