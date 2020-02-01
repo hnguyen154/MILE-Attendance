@@ -1,5 +1,8 @@
 <?php
   include("db.php");
+  ini_set('display_errors', 1);
+  ini_set('display_startup_errors', 1);
+  error_reporting(E_ALL);
 ?>
 
 <!DOCTYPE html>
@@ -48,11 +51,15 @@
 
     <body>
         <div class="header">
-          <h2 style="text-align:center;"> URBAN LIFE MILE ATTENDANCE MAKE-UP FORM
+          <h3 style="text-align:center;"> URBAN LIFE MILE ATTENDANCE MAKE-UP FORM
             <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">
                       <span class="glyphicon glyphicon-question-sign"></span> Help
             </button>
-          </h2>
+          </h3>
+          <code>
+            <h4 style="text-align:center;">ASK FOR <kbd>STUDENT ID</kbd> TO ENSURE CORRECT ENTRY</h3>
+            <h4 style="text-align:center;">If you edit any entry, you <u><b>NEED TO CHANGE</b></u> Assistant's name to <u><b>YOUR NAME</b></u>!</h3>
+          </code>
           <!-- Help PopUp -->
           <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
@@ -102,7 +109,7 @@
 
         <div class="container-fluid">
           <div id="body1">
-            <form method="post">
+            <form method="post" autocomplete="off">
               <div class="row">
                   <div class="col-sm-3">
                     <div class="form-group">
@@ -137,7 +144,7 @@
                       </div><br>
                       <div class="form-group">
                         <label for="StudentID" class="col-md-5">Student ID:</label>
-                        <input type="text" class="col-md-7" name="StudentID" id="StudentID" placeholder="000-00-0000" required>
+                        <input type="text" class="col-md-7" name="StudentID" id="StudentID" placeholder="000-00-0000" maxlength="11" required>
                       </div><br>
                     </div>
 
@@ -213,10 +220,10 @@
                 </form>
 
                 <div class="row" style="text-align:center">
-                  <form action="delete.php" method="post"  onSubmit="return confirm('Are you sure to delete?')">
-                     <input type="password" name="pass" placeholder="Password"></input>
-                     <button type="submit" class="btn btn-default" name="deleteAll">New Semester</button>
-                  </form>
+                    <form action="delete.php" method="post"  onSubmit="return confirm('Are you sure to delete?')">
+                       <input type="password" name="pass" placeholder="Password"></input>
+                       <button type="submit" class="btn btn-default" name="deleteAll">New Semester</button>
+                    </form>
                 </div>
               </div>
               <hr>
@@ -269,8 +276,11 @@
 
 
             <div id="body2">
+
                 <input class="form-control" type="text" id="SearchInput" placeholder="Search...">
                 <br>
+
+
                 <table id="table" class="table table-bordered">
                     <thead class="thead-light">
                       <tr>
@@ -296,7 +306,7 @@
                            {
                             echo '
                             <tr>
-                              <td>'.$row["entry"].'</td>
+                               <td>'.$row["entry"].'</td>
                                <td>'.$row["Week"].'</td>
                                <td>'.$row["StudentID"].'</td>
                                <td>'.$row["fname"].'</td>
@@ -401,9 +411,30 @@
                         dom: 'Blrtip',
                         buttons: [
                             'excel', 'pdf'
+                        ],
+                        "columnDefs": [
+                          { "visible": false, "targets": 2 }
                         ]
                     });
 
+              });
+
+              //ADD DASHES FOR STUDENT ID
+              $(function () {
+                  $('#StudentID').keydown(function (e) {
+                     var key = e.charCode || e.keyCode || 0;
+                     $text = $(this);
+                     if (key !== 8 && key !== 9) {
+                         if ($text.val().length === 3) {
+                             $text.val($text.val() + '-');
+                         }
+                         if ($text.val().length === 6) {
+                             $text.val($text.val() + '-');
+                         }
+                     }
+
+                     return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+                 })
               });
 
 
